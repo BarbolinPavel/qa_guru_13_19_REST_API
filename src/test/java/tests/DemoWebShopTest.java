@@ -11,7 +11,6 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
 public class DemoWebShopTest extends TestBase {
-
     @Test
     @Tag("demowebshop")
     @DisplayName("Successful registation to some demowebshop (API)")
@@ -29,8 +28,8 @@ public class DemoWebShopTest extends TestBase {
                     .formParam("FirstName", testData.firstName)
                     .formParam("LastName", testData.lastName)
                     .formParam("Email", testData.email)
-                    .formParam("Password", testData.passwordRnd)
-                    .formParam("ConfirmPassword", testData.passwordRnd)
+                    .formParam("Password", testData.passwordR)
+                    .formParam("ConfirmPassword", testData.passwordR)
                     .log().all()
                     .when()
                     .post("/register")
@@ -42,7 +41,7 @@ public class DemoWebShopTest extends TestBase {
                     open("/login"));
             step("Вводим логин и пароль в форму авторизации", () ->
                     $("#Email").setValue(testData.email));
-                    $("#Password").setValue(testData.passwordRnd).pressEnter();
+                    $("#Password").setValue(testData.passwordR).pressEnter();
 
             step("Проверяем, что пользователь успешно залогинился", () ->
                     $(".account").shouldHave(text(testData.email)));
@@ -62,7 +61,7 @@ public class DemoWebShopTest extends TestBase {
                             .contentType("application/x-www-form-urlencoded; charset=UTF-8")
 //                            .cookie("ARRAffinity=92eb765899e80d8de4d490df907547e5cb10de899e8b754a4d5fa1a7122fad69")
                             .formParam("Email", testData.email)
-                            .formParam("Password", testData.passwordRnd)
+                            .formParam("Password", testData.passwordR)
                             .formParam("RememberMe", "false")
                             .log().all()
                             .when()

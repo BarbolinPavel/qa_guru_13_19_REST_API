@@ -8,10 +8,10 @@ repositories {
 }
 
 def allureVersion = "2.19.0",
-    selenideVersion = "6.7.4",
-    restAssuredVersion = "5.2.0",
+    selenideVersion = "6.5.0",
+    restAssuredVersion = "4.3.1",
     junitVersion = "5.9.0",
-    slf4jVersion = "2.0.1",
+    slf4jVersion = "2.0.3",
     freemarkerVersion = "2.3.31"
 
 
@@ -40,7 +40,7 @@ dependencies {
             "org.freemarker:freemarker:$freemarkerVersion",
             "com.github.javafaker:javafaker:1.0.2",
             'org.aeonbits.owner:owner:1.0.12',
-            'io.github.bonigarcia:webdrivermanager:5.2.1',
+            'org.aspectj:aspectjweaver:1.9.9.1'
     )
 }
 
@@ -57,5 +57,11 @@ tasks.withType(Test) {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
+    }
+}
+
+task owner_test(type: Test){
+    useJUnitPlatform {
+        includeTags "demowebshop"
     }
 }
